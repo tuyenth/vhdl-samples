@@ -1,0 +1,50 @@
+add r01, r00, r00
+add r02, r00, r00
+add r03, r00, r00
+add r04, r00, r00
+add r05, r00, r00
+add r06, r00, r00
+add r07, r00, r00
+add r08, r00, r00
+add r09, r00, r00
+add r10, r00, r00
+add r11, r00, r00
+add r12, r00, r00
+add r13, r00, r00
+add r14, r00, r00
+add r15, r00, r00
+li r01, 1
+li r02, 3
+li r03, 5
+li r04, 7
+li r05, 9
+li r06, 11
+li r07, 13
+li r08, 15
+li r09, 17
+li r10, 19
+li r11, 21
+li r12, 23
+li r13, 25
+li r14, 27
+li r15, 29
+store r00, r01
+store r00, r02
+store r00, r03
+store r00, r04
+store r00, r05
+store r00, r06
+store r00, r07
+store r00, r08
+store r00, r09
+store r00, r10
+store r00, r11
+store r00, r12
+store r00, r13
+store r00, r14
+store r00, r15
+li r15, 42
+store r15, r15
+add r02, r15, r15
+store r02, r15
+

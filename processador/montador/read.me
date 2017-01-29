@@ -1,0 +1,106 @@
+=========================================
+Montador para Trabalho2 - MO801 -v0.2
+=========================================
+
+Introdução:
+===========
+
+Este montador baseia-se no set de instruções definidos para o Trabalho 2 
+de MO-801 e tem por objetivo gerar programas de teste para o processador
+simples a ser implementado.
+
+Como utilizar:
+==============
+
+Extrair o pacote em um diretório, verificando que os arquivos montador.jar e
+antlr.jar estão presentes.
+Para executar utilize:
+
+java -jar montador.jar <parametros> arquivo_entrada [arquivo_saida]
+
+Onde os parâmetros são : -a<formato_endereço><formato_instrução> ou
+apenas -<formato_instrução>. O formato define como será a saída do endereço
+e da instrução, sendo representado por um desses caracteres:
+
+b(binário),o (octal),d(decimal),x(hexadecimal) e s(representação textual)
+
+Ex:
+
+java -jar montador.jar -adb arq.in arq.out
+
+Gera um arquivo arq.out com os endereços em decimal e as instruções em binário
+
+java -jar montador.jar -x arq.in arq.out
+
+Gera um arquivo apenas com as instruções em hexadecimal
+
+OBS:Se os parametros forem omitidos a saída será apenas das instruções 
+em formato decimal.
+
+Gramática:
+==========
+
+ O montador segue as instruções definidas. Apenas uma instrução é aceita 
+ por linha. Os registradores são r00 a r15 e algumas funcionalidades 
+ foram incluídas para facilitar a geração de programas teste:
+ 
+ Deslocamento
+ ==============
+ 
+ Para instruções de deslocamento utilizar o número (último parâmetro) entre 
+ chaves, no formato 00 a 15 (feito desta forma para simplificar a gramática):
+ 
+ shl r03,r02,[05]
+ shr r01,r05,[13]
+ 
+
+ Comentários de uma linha 
+ ========================
+  
+ sub r03,r15,r14
+ \\ comentario 
+ call r12,r07
+ 
+ Rótulos para instrução
+ ======================
+ 
+ LABEL: add r01,r03,r05
+ ...
+ li r07,lower8(LABEL)
+ 
+ Neste exemplo a parte baixa de r07 receberá a parte baixa da instrução na 
+ linha do rótulo (no caso o endereço de add...).
+ Para instruções do tipo I as funções upper8 e lower8 estão disponíveis.
+ Para instruções do tipo J, apenas estão disponíveis labels diretamente.
+ 
+OBS: Também são aceitos números ao invés dos rótulos para as instruções I e J
+
+ Rótulos para posições de memória
+ ================================
+ 
+ Pode-se associar uma posição de memória com um rótulo utilizando a instrução
+ 
+ { RÓTULO POSIÇÃO_MEMÓRIA }
+ 
+ O rótulo pode ser utilizado de mesma forma que rótulos de instrução
+ 
+ Ex:
+ 
+ ....
+ { EXEMPLO  45076}
+ ....
+ jump EXEMPLO
+ li r03,lower8(EXEMPLO)
+ ....
+ 
+Observação:
+=============
+
+Esta é uma versão inicial deste montador. Colaboração para melhoramentos 
+e correções são muito bem vindas! :-)
+ 
+ 
+
+ 
+ 
+
